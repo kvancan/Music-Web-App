@@ -85,12 +85,14 @@ function add_array(){
     $songs = [];
     $final = top_tracks();
          for($i= 0;$i<7;$i++){
+            $song["link"] = $final["tracks"][$i]["album"]["external_urls"]["spotify"];
             $song["artist"] = $final["tracks"][$i]["album"]["artists"][0]["name"];
             $song["name"] = $final["tracks"][$i]["name"];
             $song["preview"] = $final["tracks"][$i]["preview_url"];
             $song["images"] = $final["tracks"][$i]["album"]["images"][0]["url"];
             array_push($songs, $song);
         }
+
       return $songs;  
 }
 if (isset($_GET["artist"])){
@@ -123,7 +125,7 @@ if (isset($_GET["artist"])){
     border-radius: 50px;
     text-align: center;
     ">
-  <input type="text" form="artist" name="artist" style="height: 99%;width: 79%;border: 0;outline:none"  >
+  <input type="text" id="search" form="artist" name="artist" style="height: 99%;width: 79%;border: 0;outline:none"  >
   <a onclick="submitform()" ><ion-icon name="search-outline"></ion-icon></a>
 </div>
     <div class="album-cover">
@@ -135,7 +137,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[0]["images"] ?>" />
             <div class="overlay">
               <a
-                href=""
+                href="<?= $info[0]["url"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -146,7 +148,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[1]["images"] ?>" />
             <div class="overlay">
               <a
-                href="https://www.youtube.com/watch?v=qEnfeG8uBRY&ab_channel=AliciaKeys-Topic"
+                href="<?= $info[1]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -157,7 +159,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[2]["images"] ?>" />
             <div class="overlay">
               <a
-                href="https://www.youtube.com/watch?v=LgsaD-vNJ9M"
+                href="<?= $info[2]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -168,7 +170,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[3]["images"] ?>" />
             <div class="overlay">
               <a
-                href="https://www.youtube.com/watch?v=a5uQMwRMHcs&ab_channel=DaftPunkVEVO"
+                href="<?= $info[3]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -179,7 +181,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[4]["images"] ?>" />
             <div class="overlay">
               <a
-                href="https://www.youtube.com/watch?v=H5v3kku4y6Q&ab_channel=HarryStylesVEVO"
+                href="<?= $info[4]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -190,7 +192,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[5]["images"] ?>" />
             <div class="overlay">
               <a
-                href="https://www.youtube.com/watch?v=9HDEHj2yzew&ab_channel=DuaLipa"
+                href="<?= $info[5]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -201,7 +203,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[6]["images"] ?>" />
             <div class="overlay">
               <a
-                href="https://www.youtube.com/watch?v=tCXGJQYZ9JA&ab_channel=TaylorSwiftVEVO"
+                href="<?= $info[6]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -291,6 +293,12 @@ function submitform(){
   document.getElementById("artist").submit();
 
 }
+
+document.getElementById('search').addEventListener('keypress', function(event) {
+        if (event.keyCode == 13) {
+            submitform();
+        }
+    })
 
  </script>
 <script type="text/javascript" src="./script.js"></script>
