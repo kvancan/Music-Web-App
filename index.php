@@ -1,6 +1,5 @@
 
 <?php
-
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
@@ -57,7 +56,6 @@ function apidenvericek(){
     $artist_id = $value["artists"]["items"][0]["id"];
     return $artist_id;
 }
-
 function top_tracks(){
     $authorization = access();
     $artist_id = apidenvericek();
@@ -80,7 +78,6 @@ function top_tracks(){
     $value = json_decode($response, true);
     return $value;
 }
-
 function add_array(){
     $songs = [];
     $final = top_tracks();
@@ -98,11 +95,7 @@ function add_array(){
 if (isset($_GET["artist"])){
     $info = add_array();
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -299,9 +292,7 @@ document.getElementById('search').addEventListener('keypress', function(event) {
             submitform();
         }
     })
-
  </script>
 <script type="text/javascript" src="./script.js"></script>
-
 </body>
 </html>
