@@ -107,7 +107,7 @@ if (isset($_GET["artist"])){
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Music Player with Slider | Swiper JS</title>
+  <title>Music-Web-App</title>
   <link href="https://fonts.googleapis.com/css?family=Knewave&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'><link rel="stylesheet" href="./style.css">
