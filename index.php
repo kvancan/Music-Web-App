@@ -85,17 +85,18 @@ function add_array(){
             $song["link"] = $final["tracks"][$i]["album"]["external_urls"]["spotify"];
             $song["artist"] = $final["tracks"][$i]["album"]["artists"][0]["name"];
             $song["name"] = $final["tracks"][$i]["name"];
-            $song["preview"] = $final["tracks"][$i]["preview_url"];
+            $song["preview"] = $final["tracks"][$i]["preview_url"] ?? ""; 
             $song["images"] = $final["tracks"][$i]["album"]["images"][0]["url"];
             array_push($songs, $song);
         }
-
       return $songs;  
 }
 if (isset($_GET["artist"])){
     $info = add_array();
+
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -123,6 +124,11 @@ if (isset($_GET["artist"])){
 </div>
     <div class="album-cover">
     <form id="artist" method="GET">
+      </form>
+      <?php 
+      
+      if (isset($_GET["artist"])){
+      ?>
       <div class="swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -130,7 +136,7 @@ if (isset($_GET["artist"])){
               src="<?= $info[0]["images"] ?>" />
             <div class="overlay">
               <a
-                href="<?= $info[0]["url"] ?>"
+                href="<?= $info[0]["link"] ?>"
                 target="_blank"
                 ><ion-icon name="radio-outline"></ion-icon
               ></a>
@@ -228,12 +234,37 @@ if (isset($_GET["artist"])){
         </button>
       </div>
     </div>
+    <?php 
+    
+    }
+
+    ?>
   </body>
 <!-- partial -->
   <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
 <script src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js'></script>
 <script src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js'></script>
 <script type="text/javascript" > 
+
+function submitform(){
+
+document.getElementById("artist").submit();
+
+}
+
+document.getElementById('search').addEventListener('keypress', function(event) {
+      if (event.keyCode == 13) {
+          submitform();
+      }
+  })
+
+<?php 
+      
+      if (isset($_GET["artist"])){
+      
+
+?>
+
 
   Window.songs = [
   {
@@ -281,17 +312,12 @@ if (isset($_GET["artist"])){
   },
 ];
 
-function submitform(){
+    <?php 
+    
+    }
 
-  document.getElementById("artist").submit();
+    ?>
 
-}
-
-document.getElementById('search').addEventListener('keypress', function(event) {
-        if (event.keyCode == 13) {
-            submitform();
-        }
-    })
  </script>
 <script type="text/javascript" src="./script.js"></script>
 </body>
